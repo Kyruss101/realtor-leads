@@ -2,20 +2,6 @@ document.addEventListener('DOMContentLoaded', function() {
     loadTeamList(1); // Load the first page by default
     loadStateFilter(); // Load the state filter options
 
-    document.getElementById('createForm').addEventListener('submit', function(event) {
-        event.preventDefault();
-        const formData = new FormData(this);
-        fetch('../includes/create.php', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-            showMessage(data.message);
-            loadTeamList(1); // Reload the first page after creation
-            hideCreateForm();
-        });
-    });
 });
 
 function loadStateFilter() {
@@ -182,8 +168,8 @@ function showCreateForm() {
                             <input type="text" class="form-control" name="brokerage" required>
                         </div>
                         <div class="form-group">
-                            <label for="sales">Last 12 Months Sales:</label>
-                            <input type="number" class="form-control" name="sales" required>
+                            <label for="lastMonthSales">Last 12 Months Sales:</label>
+                            <input type="number" class="form-control" name="lastMonthSales" required>
                         </div>
                         <div class="form-group">
                             <label for="agentPhone">Agent Phone:</label>
@@ -207,7 +193,7 @@ function showCreateForm() {
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary" onclick="submitForm()">Submit</button>
                     </div>
                 </form>
                 </div>
@@ -216,6 +202,29 @@ function showCreateForm() {
     `;
 
     createForm.insertAdjacentHTML('beforeend', showFormModal);
+}
+
+function submitForm(){
+    var form = document.querySelector("#creationForm form");
+
+    var formData = new FormData(form);
+
+    console.log(formData);
+
+    fetch('../includes/create.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        response.json()
+        console.log({response: response.json()});
+    })
+    .then(data => {
+        showMessage(data.message);
+        loadTeamList(1);
+        hideCreateForm();
+    });
+
 }
 
 function hideCreateForm() {
