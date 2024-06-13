@@ -169,11 +169,11 @@ function showCreateForm() {
                         </div>
                         <div class="form-group">
                             <label for="lastMonthSales">Last 12 Months Sales:</label>
-                            <input type="number" class="form-control" name="lastMonthSales" required>
+                            <input type="number" class="form-control" name="lastMonthSales" value="0" required>
                         </div>
                         <div class="form-group">
                             <label for="agentPhone">Agent Phone:</label>
-                            <input type="number" class="form-control" name="agentPhone" required>
+                            <input type="text" id="agentPhone" class="form-control" name="agentPhone" placeholder="(123) 456-7890" required>
                         </div>
                         <div class="form-group">
                             <label for="agentEmail">Agent Email:</label>
@@ -181,15 +181,43 @@ function showCreateForm() {
                         </div>
                         <div class="form-group">
                             <label for="zillowProfile">Zillow Profile:</label>
-                            <input type="file" class="form-control" name="zillowProfile" required>
+                            <input type="file" class="form-control" name="zillowProfile">
                         </div>
                         <div class="form-group">
                             <label for="zillowReviews">Zillow Reviews:</label>
-                            <input type="number" class="form-control" name="zillowReviews" required>
+                            <input type="number" class="form-control" name="zillowReviews" value="0">
                         </div>
                         <div class="form-group">
                             <label for="notes">Notes:</label>
                             <textarea name="notes" class="form-control" rows="1"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="website">Website:</label>
+                            <input type="text" class="form-control" name="website">
+                        </div>
+                        <div class="form-group">
+                            <label for="facebook">Facebook:</label>
+                            <input type="text" class="form-control" name="facebook">
+                        </div>
+                        <div class="form-group">
+                            <label for="pinterest">Pinterest:</label>
+                            <input type="text" class="form-control" name="pinterest">
+                        </div>
+                        <div class="form-group">
+                            <label for="blog">Blog:</label>
+                            <input type="text" class="form-control" name="blog">
+                        </div>
+                        <div class="form-group">
+                            <label for="instagram">Instagram:</label>
+                            <input type="text" class="form-control" name="instagram">
+                        </div>
+                        <div class="form-group">
+                            <label for="linkedIn">LinkedIn:</label>
+                            <input type="text" class="form-control" name="linkedIn">
+                        </div>
+                        <div class="form-group">
+                            <label for="youtube">YouTube:</label>
+                            <input type="text" class="form-control" name="youtube">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -202,6 +230,27 @@ function showCreateForm() {
     `;
 
     createForm.insertAdjacentHTML('beforeend', showFormModal);
+
+    // Agent Phone Format
+    document.getElementById('agentPhone').addEventListener('input', function (e) {
+        let value = e.target.value;
+    
+        // Insert formatting logic here
+        // For simplicity, let's assume we just handle "Cell" designation
+        if (value.startsWith("Cell")) {
+            value = value.replace(/\D/g, '');
+            if (value.length > 4) value = value.slice(0, 4) + ' ' + value.slice(4);
+            if (value.length > 8) value = value.slice(0, 8) + '-' + value.slice(8);
+            if (value.length > 13) value = value.slice(0, 13) + '-' + value.slice(13);
+            e.target.value = 'Cell ' + value;
+        } else {
+            // Default phone formatting
+            value = value.replace(/\D/g, '');
+            if (value.length > 3) value = '(' + value.slice(0, 3) + ') ' + value.slice(3);
+            if (value.length > 9) value = value.slice(0, 9) + '-' + value.slice(9);
+            e.target.value = value;
+        }
+    });
 }
 
 function submitForm(){
