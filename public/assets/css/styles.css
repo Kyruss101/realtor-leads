@@ -1,0 +1,136 @@
+/* styles.css */
+
+/* Add any custom styles here */
+/* Fonts */
+@font-face {
+  font-family: "Kiro Bold";
+  src: url("../fonts/Kiro-Bold.otf") format("opentype");
+}
+@font-face {
+  font-family: "Kiro Regular";
+  src: url("../fonts/Kiro-Regular.otf") format("opentype");
+}
+
+/* Color Scheme */
+:root {
+  --primary-clr: #2b415e;
+  --secondary-clr: #39939d;
+  --vivid-orange-clr: #f2693f;
+  --light-turquoise-clr: #4dc4d1;
+  --slate-blue-clr: #a3b5cc;
+  --light-aqua-clr: #cfe3e6;
+  --pinkish-beige-clr: #f2dfda;
+}
+
+* {
+  color: var(--primary-clr);
+  font-family: "Kiro Regular";
+}
+
+.container {
+  max-width: 100%;
+}
+.container h1 {
+  font-family: "Kiro Bold";
+  font-size: 2rem;
+  text-align: center;
+}
+.container .add-new .btn {
+  background-color: var(--secondary-clr);
+  border: none;
+  padding: 0.5em 1.5em;
+}
+.container .add-new .btn:hover {
+  opacity: 0.8;
+}
+.container .filter-container .state-filter {
+  width: 25ch;
+}
+.container .filter-container .state-filter,
+.container .filter-container .filter-input {
+  border-color: var(--primary-clr);
+}
+.container .filter-container .min-sales,
+.container .filter-container .min-reviews {
+  width: 13ch;
+}
+.container .create-form {
+    box-shadow: 1px 1px 8px #b3b3b3;
+    border-radius: 8px;
+    max-width: 450px;
+    width: 100%;
+    padding: 2em 1em;
+    margin: 0 auto;
+}
+.container .create-form form .form-group {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    margin-bottom: 1em;
+}
+.container .create-form form .form-group label {
+    width: 15%;
+}
+.container .create-form form .form-group .form-control {
+    border-color: var(--primary-clr);
+}
+.container .create-form form .btn {
+    background-color: #198754;
+    border: none;
+    display: block;
+    padding: 0.5em 1.5em;
+    margin-top: 2em;
+    margin-inline: auto;
+}
+.container .create-form form .btn:hover {
+  opacity: 0.8;
+}
+.container .team-list .table-responsive {
+  margin-bottom: 2em;
+}
+.container .team-list .table-responsive .table {
+  width: 1860px;
+}
+.container .team-list .table-responsive .table thead tr th {
+  background-color: var(--light-aqua-clr);
+}
+.container .team-list .table-responsive .table thead tr th:not(:first-child) {
+  text-align: center;
+}
+.container .team-list .table-responsive .table tbody tr td:not(:first-child) {
+  text-align: center;
+}
+.container .team-list .table-responsive .table tbody tr td .btn-link {
+  color: var(--secondary-clr);
+}
+.container .team-list .table-responsive .table tbody tr .btn-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.container .team-list .table-responsive .table tbody tr td .btn-info,
+.container .team-list .table-responsive .table tbody tr td .btn-success {
+  border: none;
+  width: 80px;
+}
+.container .team-list .table-responsive .table tbody tr td .btn-info:hover,
+.container .team-list .table-responsive .table tbody tr td .btn-success:hover {
+  opacity: 0.8;
+}
+.container .team-list nav .pagination .page-item .page-link {
+  border-color: var(--primary-clr);
+  color: var(--primary-clr);
+}
+.container .team-list nav .pagination .active .page-link {
+  background-color: var(--primary-clr);
+  border-color: var(--primary-clr);
+  color: #fff;
+}
+
+/* Medias */
+@media screen and (min-width: 1860px) {
+  .container .team-list .table-responsive .table {
+    width: 100%;
+  }
+}
