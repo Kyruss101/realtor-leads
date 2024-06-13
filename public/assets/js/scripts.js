@@ -72,7 +72,7 @@ function loadTeamList(page, filterState = '', minSales = '', minReviews = '') {
         const end = start + itemsPerPage;
         const paginatedRows = filteredRows.slice(start, end);
 
-        let table = `<div class="table-responsive"><table class="table table-bordered"><thead><tr>`;
+        let table = `<div class="table-responsive"><div class="table-width"><table class="table table-bordered"><thead><tr>`;
         headers.forEach(header => {
             if (!['Facebook', 'Instagram', 'LinkedIn', 'Pinterest', 'Twitter', 'YouTube', 'Website', 'Blog'].includes(header)) {
                 table += `<th>${header}</th>`;
@@ -91,7 +91,7 @@ function loadTeamList(page, filterState = '', minSales = '', minReviews = '') {
             table += `<td>
                 <div class="btn-wrap">
                     <button class="btn btn-info btn-sm" onclick="toggleDetails(${index})">Details</button>
-                    <button class="btn btn-success btn-sm" onclick="saveRow(${index})">Save</button>
+                    <a href="" class="btn btn-warning btn-sm" onclick="saveRow(${index})">Edit</a>
                 </div>
             </td></tr>`;
             table += `<tr id="details-${index}" style="display:none;"><td colspan="${headers.length + 1}">
@@ -101,9 +101,9 @@ function loadTeamList(page, filterState = '', minSales = '', minReviews = '') {
             table += `<tr><th>Pinterest</th><td>${row[headers.indexOf('Pinterest')] || ''}</td><th>Twitter</th><td>${row[headers.indexOf('Twitter')] || ''}</td><th>YouTube</th><td>${row[headers.indexOf('YouTube')] || ''}</td></tr>`;
             table += `</tbody></table></td></tr>`;
         });
-        table += `</tbody></table></div>`;
+        table += `</tbody></table></div></div>`;
         
-        let pagination = `<nav aria-label="Page navigation"><ul class="pagination justify-content-center">`;
+        let pagination = `<nav class="d-flex justify-content-between" aria-label="Page navigation"><div class="left-container"><span id="recordCount" class="record-count"></span></div><ul class="pagination">`;
         const maxPagesToShow = 5;
         let startPage = Math.max(page - Math.floor(maxPagesToShow / 2), 1);
         let endPage = Math.min(startPage + maxPagesToShow - 1, totalPages);
@@ -142,24 +142,80 @@ function toggleDetails(index) {
 }
 
 function showCreateForm() {
-    document.getElementById('createForm').innerHTML = `
-        <form>
-            <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" class="form-control" name="name" required>
+    const createForm = document.getElementById('createForm');
+
+    let showFormModal = `
+        <!-- Modal -->
+        <div class="modal fade" id="showAddNewModal" tabindex="-1" role="dialog" aria-labelledby="showAddNewModalTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="showAddNewModalTitle">Add New Team Member</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="agentName">Agent Name:</label>
+                            <input type="text" class="form-control" name="agentName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="teamName">Team Name:</label>
+                            <input type="text" class="form-control" name="teamName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="state">State:</label>
+                            <select id="states" class="form-control" name="state" required>
+                                <option disabled selected>...</option>
+                                <option value="az">AZ</option>
+                                <option value="ca">CA</option>
+                                <option value="fl">FL</option>
+                                <option value="il">IL</option>
+                                <option value="nc">NC</option>
+                                <option value="or">OR</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="brokerage">Brokerage:</label>
+                            <input type="text" class="form-control" name="brokerage" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="sales">Last 12 Months Sales:</label>
+                            <input type="number" class="form-control" name="sales" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="agentPhone">Agent Phone:</label>
+                            <input type="number" class="form-control" name="agentPhone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="agentEmail">Agent Email:</label>
+                            <input type="email" class="form-control" name="agentEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="zillowProfile">Zillow Profile:</label>
+                            <input type="file" class="form-control" name="zillowProfile" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="zillowReviews">Zillow Reviews:</label>
+                            <input type="number" class="form-control" name="zillowReviews" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="notes">Notes:</label>
+                            <textarea name="notes" class="form-control" rows="1"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" class="form-control" name="email" required>
-            </div>
-            <div class="form-group">
-                <label for="phone">Phone</label>
-                <input type="text" class="form-control" name="phone" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+        </div>
     `;
-    document.getElementById('createForm').style.display = 'block';
+
+    createForm.insertAdjacentHTML('beforeend', showFormModal);
 }
 
 function hideCreateForm() {
