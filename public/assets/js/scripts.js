@@ -79,20 +79,24 @@ function loadTeamList(page, filterState = '', minSales = '', minReviews = '', ag
             });
             table += `<td>
                 <div class="btn-wrap">
-                    <button class="btn btn-info btn-sm" onclick="toggleDetails(${index})">Details</button>
-                    <a href="#" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#showEditModal" onclick="editRows(${row[0]})">Edit</a>
+                    <button class="btn btn-info btn-sm" title="Details" data-toggle="modal" data-target="#showSocialDetailsModal" onclick="toggleDetails(${index})">
+                        <i class="fa fa-info"></i>
+                    </button>
+                    <button class="btn btn-warning btn-sm" title="Edit" data-toggle="modal" data-target="#showEditModal" onclick="showModalEdit(${row[0]})">
+                        <i class="fa fa-edit"></i>
+                    </button>
                 </div>
             </td></tr>`;
-            table += `<tr id="details-${index}" style="display:none;"><td colspan="${headers.length + 1}">
-                <table class="table table-bordered"><tbody>`;
-            table += `<tr><th>Website</th><td>${row[headers.indexOf('Website')] || ''}</td><th>Blog</th><td>${row[headers.indexOf('Blog')] || ''}</td></tr>`;
-            table += `<tr><th>Facebook</th><td>${row[headers.indexOf('Facebook')] || ''}</td><th>Instagram</th><td>${row[headers.indexOf('Instagram')] || ''}</td><th>LinkedIn</th><td>${row[headers.indexOf('LinkedIn')] || ''}</td></tr>`;
-            table += `<tr><th>Pinterest</th><td>${row[headers.indexOf('Pinterest')] || ''}</td><th>Twitter</th><td>${row[headers.indexOf('Twitter')] || ''}</td><th>YouTube</th><td>${row[headers.indexOf('YouTube')] || ''}</td></tr>`;
-            table += `</tbody></table></td></tr>`;
+            // table += `<tr id="details-${index}" style="display:none;"><td colspan="${headers.length + 1}">
+            //     <table class="table table-bordered"><tbody>`;
+            // table += `<tr><th>Website</th><td>${row[headers.indexOf('Website')] || ''}</td><th>Blog</th><td>${row[headers.indexOf('Blog')] || ''}</td></tr>`;
+            // table += `<tr><th>Facebook</th><td>${row[headers.indexOf('Facebook')] || ''}</td><th>Instagram</th><td>${row[headers.indexOf('Instagram')] || ''}</td><th>LinkedIn</th><td>${row[headers.indexOf('LinkedIn')] || ''}</td></tr>`;
+            // table += `<tr><th>Pinterest</th><td>${row[headers.indexOf('Pinterest')] || ''}</td><th>Twitter</th><td>${row[headers.indexOf('Twitter')] || ''}</td><th>YouTube</th><td>${row[headers.indexOf('YouTube')] || ''}</td></tr>`;
+            // table += `</tbody></table></td></tr>`;
         });
         table += `</tbody></table></div></div>`;
         
-        let pagination = `<nav class="d-flex justify-content-between" aria-label="Page navigation"><div class="left-container"><span id="recordCount" class="record-count"></span></div><ul class="pagination">`;
+        let pagination = `<nav class="d-flex align-items-center justify-content-between" aria-label="Page navigation"><div class="left-container"><span id="recordCount" class="record-count"></span></div><ul class="pagination m-0">`;
         const maxPagesToShow = 5;
         let startPage = Math.max(page - Math.floor(maxPagesToShow / 2), 1);
         let endPage = Math.min(startPage + maxPagesToShow - 1, totalPages);
@@ -122,13 +126,72 @@ function loadTeamList(page, filterState = '', minSales = '', minReviews = '', ag
     });
 }
 
+const teamList = document.getElementById('teamList');
+
 function toggleDetails(index) {
-    const detailsRow = document.getElementById(`details-${index}`);
-    if (detailsRow.style.display === 'none') {
-        detailsRow.style.display = '';
-    } else {
-        detailsRow.style.display = 'none';
-    }
+    // const detailsRow = document.getElementById(`details-${index}`);
+    // if (detailsRow.style.display === 'none') {
+    //     detailsRow.style.display = '';
+    // } else {
+    //     detailsRow.style.display = 'none';
+    // }
+
+
+    let showSocialDetails = `
+        <!-- Modal -->
+        <div class="modal fade" id="showSocialDetailsModal" tabindex="-1" role="dialog" aria-labelledby="showSocialDetailsModalTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="showSocialDetailsModalTitle">Details</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form id="creationForm">
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="website">Website:</label>
+                                <input type="text" id="website" class="form-control" name="website" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="facebook">Facebook:</label>
+                                <input type="text" id="facebook" class="form-control" name="facebook" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="pinterest">Pinterest:</label>
+                                <input type="text" id="pinterest" class="form-control" name="pinterest" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="blog">Blog:</label>
+                                <input type="text" id="blog" class="form-control" name="blog" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="instagram">Instagram:</label>
+                                <input type="text" id="instagram" class="form-control" name="instagram" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="twitter">Twitter:</label>
+                                <input type="text" id="twitter" class="form-control" name="twitter" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="linkedIn">LinkedIn:</label>
+                                <input type="text" id="linkedIn" class="form-control" name="linkedIn" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="youtube">YouTube:</label>
+                                <input type="text" id="youtube" class="form-control" name="youtube" readonly>
+                            </div>
+                        </div>
+                    <div class="modal-footer">
+                    </div>
+                </form>
+                </div>
+            </div>
+        </div>
+    `;
+
+    teamList.insertAdjacentHTML('beforeend', showSocialDetails);
 }
 
 function showCreateForm() {
@@ -149,31 +212,23 @@ function showCreateForm() {
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="agentName">Agent Name:</label>
-                            <input type="text" class="form-control" name="agentName" required>
+                            <input type="text" id="agentName" class="form-control" name="agentName" required>
                         </div>
                         <div class="form-group">
                             <label for="teamName">Team Name:</label>
-                            <input type="text" class="form-control" name="teamName" required>
+                            <input type="text" id="teamName" class="form-control" name="teamName" required>
                         </div>
                         <div class="form-group">
                             <label for="state">State:</label>
-                            <select id="states" class="form-control" name="state" required>
-                                <option disabled selected>...</option>
-                                <option value="az">AZ</option>
-                                <option value="ca">CA</option>
-                                <option value="fl">FL</option>
-                                <option value="il">IL</option>
-                                <option value="nc">NC</option>
-                                <option value="or">OR</option>
-                            </select>
+                            <input type="text" id="state" class="form-control" name="state" required>
                         </div>
                         <div class="form-group">
                             <label for="brokerage">Brokerage:</label>
-                            <input type="text" class="form-control" name="brokerage" required>
+                            <input type="text" id="brokerage" class="form-control" name="brokerage" required>
                         </div>
                         <div class="form-group">
                             <label for="lastMonthSales">Last 12 Months Sales:</label>
-                            <input type="number" class="form-control" name="lastMonthSales" value="0" required>
+                            <input type="number" id="lastMonthSales" class="form-control" name="lastMonthSales" value="0" required>
                         </div>
                         <div class="form-group">
                             <label for="agentPhone">Agent Phone:</label>
@@ -181,52 +236,57 @@ function showCreateForm() {
                         </div>
                         <div class="form-group">
                             <label for="agentEmail">Agent Email:</label>
-                            <input type="email" class="form-control" name="agentEmail" required>
+                            <input type="email" id="agentEmail" class="form-control" name="agentEmail" required>
                         </div>
                         <div class="form-group">
                             <label for="zillowProfile">Zillow Profile:</label>
-                            <input type="file" class="form-control" name="zillowProfile">
+                            <input type="file" id="zillowProfile" class="form-control" name="zillowProfile">
                         </div>
                         <div class="form-group">
                             <label for="zillowReviews">Zillow Reviews:</label>
-                            <input type="number" class="form-control" name="zillowReviews" value="0">
+                            <input type="number" id="zillowReviews" class="form-control" name="zillowReviews" value="0">
                         </div>
                         <div class="form-group">
                             <label for="notes">Notes:</label>
-                            <textarea name="notes" class="form-control" rows="1"></textarea>
+                            <textarea id="notes" class="form-control" name="notes" rows="1"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="website">Website:</label>
-                            <input type="text" class="form-control" name="website">
+                            <input type="text" id="website" class="form-control" name="website">
                         </div>
                         <div class="form-group">
                             <label for="facebook">Facebook:</label>
-                            <input type="text" class="form-control" name="facebook">
+                            <input type="text" id="facebook" class="form-control" name="facebook">
                         </div>
                         <div class="form-group">
                             <label for="pinterest">Pinterest:</label>
-                            <input type="text" class="form-control" name="pinterest">
+                            <input type="text" id="pinterest" class="form-control" name="pinterest">
                         </div>
                         <div class="form-group">
                             <label for="blog">Blog:</label>
-                            <input type="text" class="form-control" name="blog">
+                            <input type="text" id="blog" class="form-control" name="blog">
                         </div>
                         <div class="form-group">
                             <label for="instagram">Instagram:</label>
-                            <input type="text" class="form-control" name="instagram">
+                            <input type="text" id="instagram" class="form-control" name="instagram">
+                        </div>
+                        <div class="form-group">
+                            <label for="twitter">Twitter:</label>
+                            <input type="text" id="twitter" class="form-control" name="twitter">
                         </div>
                         <div class="form-group">
                             <label for="linkedIn">LinkedIn:</label>
-                            <input type="text" class="form-control" name="linkedIn">
+                            <input type="text" id="linkedIn" class="form-control" name="linkedIn">
                         </div>
                         <div class="form-group">
                             <label for="youtube">YouTube:</label>
-                            <input type="text" class="form-control" name="youtube">
+                            <input type="text" id="youtube" class="form-control" name="youtube">
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary" onclick="submitForm()">Submit</button>
+                        <button class="btn btn-primary" onclick="Update()">Update</button>
                     </div>
+                </form>
                 </div>
             </div>
         </div>
@@ -291,7 +351,7 @@ function showMessage(message) {
     }, 3000);
 }
 
-function editRows(id){
+function editRows(id) {
 
     fetch('../includes/read.php')
     .then(response => response.json())
@@ -307,20 +367,18 @@ function editRows(id){
             return recordMatch;
         })
 
-
         const result = headers.reduce((obj, property, index) => {
             obj[property] = filteredRows[0][index];
             return obj;
         }, {});
-        
+
         showModalEdit(result);
+        console.log(result);
     });
-    
 }
 
 function showModalEdit(data){
     console.log(data);
-    const createForm = document.getElementById('createForm');
 
     let showFormModal = `
         <div class="modal fade" id="showEditModal" tabindex="-1" role="dialog" aria-labelledby="showEditModalTitle" aria-hidden="true">
@@ -336,31 +394,23 @@ function showModalEdit(data){
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="agentName">Agent Name:</label>
-                            <input type="text" class="form-control" name="agentName" required>
+                            <input type="text" id="agentName" class="form-control" name="agentName" required>
                         </div>
                         <div class="form-group">
                             <label for="teamName">Team Name:</label>
-                            <input type="text" class="form-control" name="teamName" required>
+                            <input type="text" id="teamName" class="form-control" name="teamName" required>
                         </div>
                         <div class="form-group">
                             <label for="state">State:</label>
-                            <select id="states" class="form-control" name="state" required>
-                                <option disabled selected>...</option>
-                                <option value="az">AZ</option>
-                                <option value="ca">CA</option>
-                                <option value="fl">FL</option>
-                                <option value="il">IL</option>
-                                <option value="nc">NC</option>
-                                <option value="or">OR</option>
-                            </select>
+                            <input type="text" id="state" class="form-control" name="state" required>
                         </div>
                         <div class="form-group">
                             <label for="brokerage">Brokerage:</label>
-                            <input type="text" class="form-control" name="brokerage" required>
+                            <input type="text" id="brokerage" class="form-control" name="brokerage" required>
                         </div>
                         <div class="form-group">
                             <label for="lastMonthSales">Last 12 Months Sales:</label>
-                            <input type="number" class="form-control" name="lastMonthSales" value="0" required>
+                            <input type="number" id="lastMonthSales" class="form-control" name="lastMonthSales" value="0" required>
                         </div>
                         <div class="form-group">
                             <label for="agentPhone">Agent Phone:</label>
@@ -368,58 +418,63 @@ function showModalEdit(data){
                         </div>
                         <div class="form-group">
                             <label for="agentEmail">Agent Email:</label>
-                            <input type="email" class="form-control" name="agentEmail" required>
+                            <input type="email" id="agentEmail" class="form-control" name="agentEmail" required>
                         </div>
                         <div class="form-group">
                             <label for="zillowProfile">Zillow Profile:</label>
-                            <input type="file" class="form-control" name="zillowProfile">
+                            <input type="file" id="zillowProfile" class="form-control" name="zillowProfile">
                         </div>
                         <div class="form-group">
                             <label for="zillowReviews">Zillow Reviews:</label>
-                            <input type="number" class="form-control" name="zillowReviews" value="0">
+                            <input type="number" id="zillowReviews" class="form-control" name="zillowReviews" value="0">
                         </div>
                         <div class="form-group">
                             <label for="notes">Notes:</label>
-                            <textarea name="notes" class="form-control" rows="1"></textarea>
+                            <textarea id="notes" class="form-control" name="notes" rows="1"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="website">Website:</label>
-                            <input type="text" class="form-control" name="website">
+                            <input type="text" id="website" class="form-control" name="website">
                         </div>
                         <div class="form-group">
                             <label for="facebook">Facebook:</label>
-                            <input type="text" class="form-control" name="facebook">
+                            <input type="text" id="facebook" class="form-control" name="facebook">
                         </div>
                         <div class="form-group">
                             <label for="pinterest">Pinterest:</label>
-                            <input type="text" class="form-control" name="pinterest">
+                            <input type="text" id="pinterest" class="form-control" name="pinterest">
                         </div>
                         <div class="form-group">
                             <label for="blog">Blog:</label>
-                            <input type="text" class="form-control" name="blog">
+                            <input type="text" id="blog" class="form-control" name="blog">
                         </div>
                         <div class="form-group">
                             <label for="instagram">Instagram:</label>
-                            <input type="text" class="form-control" name="instagram">
+                            <input type="text" id="instagram" class="form-control" name="instagram">
+                        </div>
+                        <div class="form-group">
+                            <label for="twitter">Twitter:</label>
+                            <input type="text" id="twitter" class="form-control" name="twitter">
                         </div>
                         <div class="form-group">
                             <label for="linkedIn">LinkedIn:</label>
-                            <input type="text" class="form-control" name="linkedIn">
+                            <input type="text" id="linkedIn" class="form-control" name="linkedIn">
                         </div>
                         <div class="form-group">
                             <label for="youtube">YouTube:</label>
-                            <input type="text" class="form-control" name="youtube">
+                            <input type="text" id="youtube" class="form-control" name="youtube">
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn-primary" onclick="Update()">Update</button>
                     </div>
+                </form>
                 </div>
             </div>
         </div>
     `;
 
-    createForm.insertAdjacentHTML('beforeend', showFormModal);
+    teamList.insertAdjacentHTML('beforeend', showFormModal);
 
     // Agent Phone Format
     document.getElementById('agentPhone').addEventListener('input', function (e) {
