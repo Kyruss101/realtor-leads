@@ -17,11 +17,11 @@
     <div class="container mt-5">
         <div class="d-flex justify-content-between mb-4">
             <div class="filter-container">
-                <h1 class="m-0 mb-3">Realtor Teams Management 1</h1>
+                <h1 class="m-0 mb-3">Realtor Teams Management</h1>
                 <div class="d-flex align-items-center gap-3 mb-3">
                     <div class="d-flex align-items-center gap-2">
                         <label for="searchByName" class="m-0">Search by Name:</label>
-                        <input id="searchByName" type="text" class="form-control search-filter m-0" placeholder="">
+                        <input id="searchByName" type="text" class="form-control search-filter m-0" placeholder="" oninput="filterData()">
                     </div>
                     <div class="">
                         <input id="salesFilter" type="text" class="min-sales form-control filter-input m-0" placeholder="Min Sales" maxlength="4" oninput="filterData()">
@@ -46,9 +46,9 @@
                     <div class="add-new">
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#showAddNewModal" onclick="showCreateForm()">Add New Team Member</button>
                     </div>
-                    <div class="align-self-end">
+                    <!-- <div class="align-self-end">
                         <span id="recordCount" class="record-count"></span>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>

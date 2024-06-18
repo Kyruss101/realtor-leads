@@ -1,1 +1,5 @@
-id,Agent Name,Team Name,State,Brokerage,Last 12 Months Sales,Agent Phone,Agent Email,Zillow Profile,Zillow Reviews,Website,Blog,Facebook,Instagram,LinkedIn,Pinterest,Twitter,YouTube,Notes,Status
+id,"Agent Name","Team Name",State,Brokerage,"Last 12 Months Sales","Agent Phone","Agent Email","Zillow Profile","Zillow Reviews",Website,Blog,Facebook,Instagram,LinkedIn,Pinterest,Twitter,YouTube,Notes,Status
+1,"Agent Name","Team Name",az,Brokerage,1,"(336) 361-1960",akoposidyan24@gmail.com,,2,Website,Blog,Facebook,Instagram,LinkedIn,Pinterest,,Youtube,Notes,Active
+2,"John Stephen Entia","Team Ambot",ca,Brokerage,11,"(336) 361-1960",akoposidyan24@gmail.com,,12,Website,Blog,Facebook,Instagram,LinkedIn,Pinterest,,Youtube,Notes,Active
+3,"Kyrus Lopez","Team Ambot",az,Broker,21,"(336) 361-1960",akoposidyan24@gmail.com,,22,,,,,,,,,,Active
+4,"John Doe","Team Name",or,Brokerage,1,"(336) 361-1960",akoposidyan24@gmail.com,,2,Website,Blog,Facebook,,,Pinterest,,,Notes,Active

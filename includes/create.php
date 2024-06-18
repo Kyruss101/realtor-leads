@@ -5,11 +5,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     echo addNewMember(
         $_POST['agentName'],
         $_POST['teamName'],
-        $_POST['agentEmail'],
-        $_POST['agentPhone'],
         $_POST['state'],
         $_POST['brokerage'],
         $_POST['lastMonthSales'],
+        $_POST['agentPhone'],
+        $_POST['agentEmail'],
         $_POST['zillowProfile'],
         $_POST['zillowReviews'],
         $_POST['website'],
@@ -22,27 +22,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_POST['youtube'],
         $_POST['notes']
     );
-
-    // echo addNewMember(
-    //     'Agent Name',
-    //     'Team Name',
-    //     'State',
-    //     'Broker',
-    //     'Month Sales',
-    //     'Agent Phone',
-    //     'Agent Email',
-    //     'Zillow Profile',
-    //     'Zillow Reviews',
-    //     'Webiste',
-    //     'Blog',
-    //     'Facebook',
-    //     'Instagram',
-    //     'Linked In',
-    //     'Pinterest',
-    //     'Twitter',
-    //     'Youtube',
-    //     'Notes'
-    // );
 }
 
 function addNewMember(
@@ -65,10 +44,9 @@ function addNewMember(
     $youtube,
     $notes
 ) {
-
     $data = readCSV();
 
-    $newId = count($data) > 0 ? end($data)[0] + 1 : 1;
+    $newId = count($data['data']) > 0 ? end($data['data'])[0] + 1 : 1;
 
     $newEntry = [
         $newId,
@@ -92,11 +70,10 @@ function addNewMember(
         htmlspecialchars($notes),
         'Active'
     ];
-    $data[] = $newEntry;
+    $data['data'][] = $newEntry;
 
     writeCSV($data);
 
     return json_encode(['status' => 'success', 'message' => 'Team member added successfully']);
 }
-
 ?>
