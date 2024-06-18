@@ -17,7 +17,7 @@
     <div class="container mt-5">
         <div class="d-flex justify-content-between mb-4">
             <div class="filter-container">
-                <h1 class="m-0 mb-3">Realtor Teams Management</h1>
+                <h1 class="m-0 mb-3">Realtor Teams Management 101</h1>
                 <div class="d-flex align-items-center gap-3 mb-3">
                     <div class="d-flex align-items-center gap-2">
                         <label for="searchByName" class="m-0">Search by Name:</label>
