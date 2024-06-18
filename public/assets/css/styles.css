@@ -58,38 +58,31 @@
 .container .filter-container .min-reviews {
   width: 13ch;
 }
-.container .team-list .modal .modal-dialog,
 .container .create-form .modal .modal-dialog {
   max-width: 1125px;
 }
-.container .team-list .modal .modal-header,
 .container .create-form .modal .modal-header {
   border: none;
   padding: 1em 2em;
 }
-.container .team-list .modal .modal-body,
 .container .create-form .modal .modal-body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2em;
   padding: 1em 2em;
 }
-.container .team-list form .form-group,
 .container .create-form form .form-group {
   display: flex;
   align-items: center;
   gap: 1em;
   margin: 0;
 }
-.container .team-list form .form-group label,
 .container .create-form form .form-group label {
   width: 25%;
 }
-.container .team-list form .form-group .form-control,
 .container .create-form form .form-group .form-control {
   border-color: var(--primary-clr);
 }
-.container .team-list .modal .modal-footer,
 .container .create-form .modal .modal-footer {
   border: none;
   padding: 1em 2em;
@@ -114,22 +107,11 @@
 .container .team-list .table-responsive .table thead tr th {
   background-color: var(--light-aqua-clr);
 }
-.container .team-list .table-responsive .table thead tr th:first-child,
-.container .team-list .table-responsive .table tbody tr td:first-child {
-  display: none;
-}
 .container .team-list .table-responsive .table thead tr th:not(:first-child) {
   text-align: center;
 }
 .container .team-list .table-responsive .table tbody tr td {
   vertical-align: middle;
-}
-.container .team-list .table-responsive .table tbody tr td[data-header="Notes"] {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 100px;
-  width: 100px;
 }
 .container .team-list .table-responsive .table tbody tr td:not(:first-child) {
   text-align: center;
@@ -146,11 +128,7 @@
 .container .team-list .table-responsive .table tbody tr td .btn-info,
 .container .team-list .table-responsive .table tbody tr td .btn-warning {
   border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  padding: 0.5em;
+  width: 80px;
 }
 .container .team-list .table-responsive .table tbody tr td .btn-info:hover,
 .container .team-list .table-responsive .table tbody tr td .btn-warning:hover {
