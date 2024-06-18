@@ -212,12 +212,12 @@ function showCreateForm() {
                             <input type="text" class="form-control" name="instagram">
                         </div>
                         <div class="form-group">
-                            <label for="linkedIn">LinkedIn:</label>
-                            <input type="text" class="form-control" name="linkedIn">
-                        </div>
-                        <div class="form-group">
                             <label for="twitter">Twitter:</label>
                             <input type="text" class="form-control" name="twitter">
+                        </div>
+                        <div class="form-group">
+                            <label for="linkedIn">LinkedIn:</label>
+                            <input type="text" class="form-control" name="linkedIn">
                         </div>
                         <div class="form-group">
                             <label for="youtube">YouTube:</label>
